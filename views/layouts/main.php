@@ -73,7 +73,6 @@ $this->registerCss("
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
-
 <header id="header">
     <div class="">
         <?php
@@ -86,20 +85,35 @@ $this->registerCss("
             'options' => ['class' => 'navbar-nav me-auto'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                
                 ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Services', 'url' => ['/site/services']],
                 ['label' => 'Contact', 'url' => ['/site/contact']],
             ]
         ]);
-        echo Html::beginTag('div', ['class' => 'navbar-nav']);
-        echo Html::a('Login', ['/site/login'], ['class' => 'btn btn-warning me-2']);
-        echo Html::a('Signup', ['/site/signup'], ['class' => 'btn btn-primary']);
-        echo Html::endTag('div');
+
+        // Check if the user is logged in
+        if (Yii::$app->user->isGuest): ?>
+            <div class="navbar-nav">
+                <?= Html::a('Login', ['/site/login'], ['class' => 'btn btn-warning me-2']) ?>
+                <?= Html::a('Signup', ['/site/signup'], ['class' => 'btn btn-primary me-2']) ?>
+            </div>
+        <?php else: ?>
+            <div class="navbar-nav">
+                <?= Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout',
+                        ['class' => 'btn btn-danger']
+                    )
+                    . Html::endForm()
+                ?>
+            </div>
+        <?php endif;
+
         NavBar::end();
         ?>
     </div>
 </header>
+
 
 <main id="" class="flex-shrink-0 container-fluid" role="main">
     <div class="container-fluid">

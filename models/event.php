@@ -17,7 +17,7 @@ class event extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'event'; // Ensure this matches your actual table name
+        return 'user'; // Ensure this matches your actual table name
     }
 
     /**
@@ -26,7 +26,7 @@ class event extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['fullname' , 'email' , 'password'] , 'required'],
+            [['name' , 'email' , 'password'] , 'required'],
             ['email' , 'email'],
             ['password' , 'string' , 'min' => 6]
         ];
@@ -37,13 +37,13 @@ class event extends ActiveRecord implements IdentityInterface
      */
     public function attributeLabels()
     {
-        return [
-            'name' => 'Event Name',
-            'location' => 'Location',
-            'date' => 'Date',
-            'time' => 'Time',
-            'description' => 'Description',
-        ];
+        // return [
+        //     'name' => 'Event Name',
+        //     'location' => 'Location',
+        //     'date' => 'Date',
+        //     'time' => 'Time',
+        //     'description' => 'Description',
+        // ];
     }
 
     /**

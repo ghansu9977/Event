@@ -77,13 +77,7 @@ $this->title = 'About the Event';
                         on personal connections.
 
                     </p>
-                    <br />
-
-                    <p>Business events are organized with professional goals in mind. Conferences and seminars are
-                        common types of business events where professionals gather to exchange knowledge, discuss
-                        industry trends, or network. 
-
-                    </p>
+                   
                     <br />
 
                     <p>For more details on ticket packages, schedules, and other event information, feel free to <a
@@ -91,7 +85,7 @@ $this->title = 'About the Event';
                     <br />
 
                     <div class="mt-3">
-                        <?= Html::a('Get Tickets', ['site/get-ticket'], ['class' => 'btn btn-danger me-2']) ?>
+                        <?= Html::a('Get Tickets', ['site/get-ticket'], ['class' => 'btn btn-warning me-2']) ?>
                         <?= Html::a('Learn More', ['site/learn-more'], ['class' => 'btn btn-outline-secondary']) ?>
                     </div>
                 </div>

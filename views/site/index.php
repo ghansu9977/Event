@@ -116,7 +116,7 @@ use yii\helpers\Html;
     <div class="event-info">
         <h1 class="event-title">World Wide Event & Digital Conference</h1>
         <p class="event-subtitle">Join us for an immersive digital experience</p>
-        <?= Html::a('Get Start →', ['site/discover'], ['class' => 'discover-more']) ?>
+        <?= Html::a('Get Start →', ['/react'], ['class' => 'btn btn-warning ']) ?>
     </div>
     <?= Html::img('@web/images/eve.jpeg', ['class' => 'event-image', 'alt' => 'Woman with laptop']) ?>
     <div class="shape circle"></div>

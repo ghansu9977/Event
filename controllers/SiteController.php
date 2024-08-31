@@ -55,6 +55,11 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionReact()
+    {
+        return $this->renderPartial('@app/web/react/index.html');
+    }
+
     /**
      * Displays homepage.
      *
@@ -64,8 +69,6 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
-
 
     /**
      * Login action.
@@ -77,32 +80,35 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
- 
+
         $model = new LoginForm();
- 
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $student = Yii::$app->user->identity;
             $token = $student->generateJwtToken();
- 
+
+            // Store the token in the session
             Yii::$app->session->set('jwt_token', $token);
- 
- 
-            Yii::$app->getSession()->setFlash('success', 'Student logged in successfully.');
-            return $this->goBack();
+
+            // Return JSON response with the token
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                'status' => 'success',
+                'token' => $token
+            ];
         } else {
             if ($model->hasErrors()) {
                 Yii::$app->getSession()->setFlash('error', 'Failed to login. Please check your credentials.');
             }
             return $this->render('login', ['model' => $model]);
         }
- 
     }
 
-    public function actionSignup(){
-        
+    public function actionSignup()
+    {
         $model = new event();
-        if($model->load(Yii::$app->request->post()) && $model->signup()){
-            Yii::$app->getSession()->setFlash('success','Signup Success');
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->getSession()->setFlash('success', 'Signup Success');
             return $this->redirect(['login']);
         }
         return $this->render('signup', [
@@ -118,6 +124,9 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
+
+        // Optionally, clear the token from the session upon logout
+        Yii::$app->session->remove('jwt_token');
 
         return $this->goHome();
     }
@@ -148,5 +157,10 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionServices()
+    {
+        return $this->render('services');
     }
 }

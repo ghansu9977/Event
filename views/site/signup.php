@@ -19,7 +19,7 @@ use yii\helpers\Url;
             <h2 class="form-title text">Sign up</h2>
             <?php $form = ActiveForm::begin(['id' => 'signup-form']); ?>
 
-            <?= $form->field($model, 'fullname')->textInput(['placeholder' => 'Your Name'])->label(false) ?>
+            <?= $form->field($model, 'name')->textInput(['placeholder' => 'Your Name'])->label(false) ?>
             <?= $form->field($model, 'email')->input('email', ['placeholder' => 'Your Email'])->label(false) ?>
             <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label(false) ?>
 
@@ -30,8 +30,8 @@ use yii\helpers\Url;
             <?php ActiveForm::end(); ?>
         </div>
         <div class="signup-image">
-            <figure><img src="images/signup-image.jpg" alt="signup image"></figure>
-            <a href="<?= Url::to(['/site/login']) ?>" class="signup-image-link">I am Already a member</a>
+        <figure><img src="<?= Url::to("@web/images/signup-image.jpg") ?>" alt="signin image"></figure>
+        <a href="<?= Url::to(['/site/login']) ?>" class="signup-image-link">I am Already a member</a>
 
         </div>
     </div>
